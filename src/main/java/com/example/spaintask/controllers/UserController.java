@@ -28,8 +28,9 @@ public class UserController {
     @RequestMapping(value = "/user/allusers",method =RequestMethod.GET )
     public ResponseEntity<Object> getUsers(){
         List<User> userList = userService.getUsers();
-        return new ResponseEntity<>(userList, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(userList,HttpStatus.ACCEPTED);
     }
+
 
 
 
