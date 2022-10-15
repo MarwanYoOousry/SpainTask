@@ -31,7 +31,6 @@ public class User {
     @Field
     private List<Service> service;
 
-
     @Field
     private UserType userType;
 

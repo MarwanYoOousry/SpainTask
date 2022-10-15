@@ -28,6 +28,7 @@ public class Service {
     @Field
     private Date date;
 
+
     public Service() {}
 
     public Service(Integer id, String vendor, Status status, boolean isActive, Date date) {

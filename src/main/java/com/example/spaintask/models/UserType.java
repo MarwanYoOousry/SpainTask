@@ -4,7 +4,6 @@ import org.springframework.data.couchbase.core.mapping.Document;
 
 @Document
 public enum UserType {
-
     anonymous , normal
 
 }

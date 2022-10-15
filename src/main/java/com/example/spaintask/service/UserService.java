@@ -1,4 +1,4 @@
-package com.example.spaintask.service.userServices;
+package com.example.spaintask.service;
 
 import com.example.spaintask.models.userModel.User;
 
@@ -14,7 +14,6 @@ public interface UserService {
 
     public abstract List<User> getUsers();
     public abstract User createUser(User newUser);
-
 
 //    public boolean isUserExist(Integer serialNumber);
 
