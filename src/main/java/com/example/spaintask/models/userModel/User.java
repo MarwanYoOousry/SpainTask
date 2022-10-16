@@ -27,13 +27,13 @@ public class User {
     @Field
     private String phone;
 
+    @Field
+    private UserType userType;
+
     @Size(max = 10)
     @Field
     private List<Service> service;
 
-
-    @Field
-    private UserType userType;
 
     public User() {}
 
@@ -83,6 +83,14 @@ public class User {
         this.phone = phone;
     }
 
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
+    }
+
     public List<Service> getService() {
         return service;
     }
@@ -91,12 +99,5 @@ public class User {
         this.service = service;
     }
 
-    public UserType getUserType() {
-        return userType;
-    }
-
-    public void setUserType(UserType userType) {
-        this.userType = userType;
-    }
 
 }

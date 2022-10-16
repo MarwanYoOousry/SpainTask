@@ -1,4 +1,4 @@
-package com.example.spaintask.service.userServices;
+package com.example.spaintask.service;
 
 import com.example.spaintask.models.Status;
 import com.example.spaintask.models.serviceModel.Service;
