@@ -19,30 +19,29 @@ public class UserController {
     UserService userService;
 
 
-    @RequestMapping("/")
-    public String wellcome() {
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public @ResponseBody String wellcome() {
 
         return "Wellcome to Manging User - Service ";
 
     }
 
     @PostMapping("/adduser")
-    public User addUser(@Valid @RequestBody User newUser){
+    public User addUser(@Valid @RequestBody User newUser) {
         return userService.createUser(newUser);
     }
 
-    @RequestMapping(value = "/user/{serialNumber}",method = RequestMethod.GET)
-    public ResponseEntity<Object> getData(@PathVariable("serialNumber") String serialNumber){
-            User user = userService.getUserWithSerial(serialNumber);
-            return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
+    @RequestMapping(value = "/user/{serialNumber}", method = RequestMethod.GET)
+    public ResponseEntity<Object> getData(@PathVariable("serialNumber") String serialNumber) {
+        User user = userService.getUserWithSerial(serialNumber);
+        return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
     }
 
-    @RequestMapping(value = "/user/allusers",method =RequestMethod.GET )
-    public ResponseEntity<Object> getUsers(){
+    @RequestMapping(value = "/user/allusers", method = RequestMethod.GET)
+    public ResponseEntity<Object> getUsers() {
         List<User> userList = userService.getUsers();
-        return new ResponseEntity<>(userList,HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(userList, HttpStatus.ACCEPTED);
     }
-
 
 
 }

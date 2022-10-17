@@ -10,12 +10,10 @@ public interface UserService {
 
     public abstract User getUserWithSerial(String serialNumber);
 
-//    User getUser(Integer id);
 
     public abstract List<User> getUsers();
+
     public abstract User createUser(User newUser);
 
-
-//    public boolean isUserExist(Integer serialNumber);
 
 }
