@@ -18,27 +18,38 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    LoggingController loggingController;
+
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public @ResponseBody String wellcome() {
 
+        loggingController.index();
         return "Wellcome to Manging User - Service ";
 
     }
 
     @PostMapping("/adduser")
     public User addUser(@Valid @RequestBody User newUser) {
+
+        loggingController.index();
+
         return userService.createUser(newUser);
     }
 
+
     @RequestMapping(value = "/user/{serialNumber}", method = RequestMethod.GET)
     public ResponseEntity<Object> getData(@PathVariable("serialNumber") String serialNumber) {
+
+        loggingController.index();
         User user = userService.getUserWithSerial(serialNumber);
         return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
     }
 
     @RequestMapping(value = "/user/allusers", method = RequestMethod.GET)
     public ResponseEntity<Object> getUsers() {
+        loggingController.index();
         List<User> userList = userService.getUsers();
         return new ResponseEntity<>(userList, HttpStatus.ACCEPTED);
     }
