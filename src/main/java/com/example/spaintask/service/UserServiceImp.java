@@ -1,5 +1,6 @@
 package com.example.spaintask.service;
 
+import com.example.spaintask.exception.UserNotFoudException;
 import com.example.spaintask.models.Status;
 import com.example.spaintask.models.serviceModel.Service;
 import com.example.spaintask.repository.UserRepository;
@@ -22,33 +23,18 @@ public class UserServiceImp implements UserService {
     public User getUserWithSerial(String serialNumber) {
 
         Optional<User> optional = userRepository.findById(serialNumber);
-      if(optional.isPresent()) {
-          User User = optional.get();
-          return User;
+        if (optional.isPresent()) {
+            User user = optional.get();
+            return user;
 
-      }else {
+        } else {
 
-          System.out.println("No user with this SerialNumber");
-        return null;}
+            throw new UserNotFoudException();
+        }
     }
 
 
-//    @Override
-//    public User getUser(Integer id) {
-//
-//        Optional<User> optional = userRepository.findById(id);
-//        User user = optional.get();
-//        return user;
-//    }
-//
-//
-//    @Override
-//    public boolean isUserExist(Integer serialNumber) {
-//        return userRepository.existsById(serialNumber);
-//    }
-
-
-@Override
+    @Override
     public List<User> getUsers() {
 
         return (List<User>) userRepository.findAll();
@@ -59,22 +45,20 @@ public class UserServiceImp implements UserService {
 
         List<Service> serviceList = newUser.getService();
 
-        // serviceList.get(serviceList.size()-1).setDate(DateTime.now().toDate());
         serviceList.forEach(service -> service.setDate(DateTime.now().toDate()));
 
-      //  serviceList.get(serviceList.size()-1).setStatus(serviceList.get(serviceList.size()-1)
-      //           .getIsActive() ? Status.Active : Status.Disactive);
-
-        serviceList.forEach(service -> {service.setStatus(service
-                   .getIsActive() ? Status.Active : Status.Disactive);});
+        serviceList.forEach(service -> {
+            service.setStatus(service
+                    .getIsActive() ? Status.Active : Status.Disactive);
+        });
 
         newUser.setService(serviceList);
 
         String temp = newUser.getSerialNumber();
-        char lastIndexOfSerial =temp.charAt(temp.length()-1);
-        if(lastIndexOfSerial >= 48 && lastIndexOfSerial <=57 ){
+        char lastIndexOfSerial = temp.charAt(temp.length() - 1);
+        if (lastIndexOfSerial >= 48 && lastIndexOfSerial <= 57) {
             newUser.setUserType(UserType.anonymous);
-        }else newUser.setUserType(UserType.normal);
+        } else newUser.setUserType(UserType.normal);
 
 
         return userRepository.save(newUser);
