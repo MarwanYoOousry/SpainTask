@@ -2,6 +2,7 @@ package com.example.spaintask.models.userModel;
 
 import com.example.spaintask.models.UserType;
 import com.example.spaintask.models.serviceModel.Service;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.couchbase.core.mapping.Document;
@@ -12,7 +13,7 @@ import org.springframework.data.couchbase.core.mapping.Field;
 import javax.validation.constraints.Size;
 import java.util.List;
 
-
+//@JsonIgnoreProperties(ignoreUnknown = true)
 @Document
 public class User {
     @Id
@@ -34,6 +35,9 @@ public class User {
     @Field
     private List<Service> service;
 
+    @Size(min = 18)
+    @Field
+    private Integer age;
 
     public User() {}
 
@@ -99,5 +103,11 @@ public class User {
         this.service = service;
     }
 
+    public Integer getAge() {
+        return age;
+    }
 
+    public void setAge(Integer age) {
+        this.age = age;
+    }
 }
